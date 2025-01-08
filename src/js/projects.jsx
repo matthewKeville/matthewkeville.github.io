@@ -1,8 +1,18 @@
 import React from 'react';
-import { Text, Title, Box, Space, Divider, Center } from '@mantine/core'
+import { Text, Title, Box, Space, Divider, Center, Paper, Image, SimpleGrid } from '@mantine/core'
+import { useFullscreen } from '@mantine/hooks';
 import { IconBrandGithub} from '@tabler/icons-react'
 
-function Project({title ="default",githubLink="",body=<></>,stack=[], tags=[]}) {
+function BodyText(props) {
+  return <Text fw={550} c="white">{props.children}</Text>
+}
+
+function ProjectImage(props) {
+  const { ref, toggle, fullscreen } = useFullscreen();
+  return <Image ref={ref} radius="md" src={props.src} onClick={toggle}/>
+}
+
+function Project({title ="default",githubLink="",body=<></>, imgUrls=[], stack=[], tags=[]}) {
 
   let stackString = ""
   stack.forEach( stack => (
@@ -19,8 +29,19 @@ function Project({title ="default",githubLink="",body=<></>,stack=[], tags=[]}) 
       <Text fw={700} span mr="4px" size="xl" c="cyber-green">{title}</Text>
       <a href={githubLink}><IconBrandGithub style={{verticalAlign:"-10px"}} size={32} color="purple"/></a>
       <Box mx="3%">
+        <Space h="md"/>
         {body}
         <Space h="md"/>
+      </Box>
+      <Space h="md"/>
+      <Box mx="3%">
+        <SimpleGrid cols={Math.min(imgUrls.length,3)}>
+          {imgUrls.map( url => (
+            <ProjectImage 
+              src={url}
+            />
+          ))}
+        </SimpleGrid>
       </Box>
       <Space h="md"/>
       <Text fw={700} size="xl" c="cyber-pink">Stack</Text>
@@ -43,15 +64,14 @@ export default function Projects() {
       title="enigma" 
       githubLink="https://github.com/matthewKeville/enigma" 
       body={<>
-        <Space h="md"/>
-        <Text c="white">
+        <BodyText fw={600} c="white">
           Enigma is a vim-inspired TUI (Terminal User Inteface) to play crosswords. As a crossword
           enjoyer and vim-lover, I found the existenting web solutions for crossword players lacking. There user interfaces
           felt cumbersome, frustrating, behaving in ways that were intuitive me. This took me out of my joy for
           the puzzle and I felt inspired to create a better experience myself.
-        </Text>
+        </BodyText>
         <Space h="md"/>
-        <Text c="white">
+        <BodyText c="white">
           Being a vim-inspired program there are two design choices that are reminiscent of my beloved vim.  Modality and Key Sequences.
           Inside the captive interface of the program the "grid", you manipulate your crossword with keystrokes scoped into different modes.
           In normal mode, you are navigating the board across grid squares or along clue axes. Here you can perform actions that
@@ -60,25 +80,32 @@ export default function Projects() {
           with the motions 'w' and 'b' are a much welcomed feature, the implementation of gg(digit)(digit) is an example where this philosphy really shines.
           The grid is juxtaposed to a dynamic clues views, displaying each clue and it's ordinal. So if something catches your eye, you don't need to play
           I spy and locate where the clue resides, you can use the sequence gg12, to jump to the 12th ordinal directly.  
-        </Text>
+        </BodyText>
         </>}
+      imgUrls={["file:///home/grifter/code/projects/website/static/enigma/enigma-single-clues.png","file:///home/grifter/code/projects/website/static/enigma/enigma-split-clues.png"]}
       stack={[ "C#", "NuGet", "Terminal.GUI", "SQLite" ]}
       tags={[ "CLI", "TUI", "Webscraper", "ORM" ]}
     />
 
-  let ReBoggled = 
+  let flummox = 
     <Project 
-      title="Reboggled" 
+      title="flummox" 
       githubLink="https://github.com/matthewKeville/ReBoggled" 
       body={
         <>
-          <Space h="md"/>
-          <Text c="white">
+          <BodyText>
             Flummox is a online platform to play Boggle™ with various customizations to the board and ruleset. While the obvious modifications of the game
             are present such as time limit changes, scoring changes (first finder, any, unique), and board size. The most unqiue feature is the ability to play
             the game in new topologies. For the word and math inclined, it is a dream to flex your lexicon on the surface of a torus or a klien bottle.
-          </Text>
+          </BodyText>
         </>}
+      imgUrls={[
+        "file:///home/grifter/code/projects/website/static/flummox/lobby.png",
+        "file:///home/grifter/code/projects/website/static/flummox/in-game-1.png",
+        "file:///home/grifter/code/projects/website/static/flummox/in-game-2.png",
+        "file:///home/grifter/code/projects/website/static/flummox/post-game-1.png",
+        "file:///home/grifter/code/projects/website/static/flummox/post-game-2.png",
+      ]}
       stack={[ "Java", "Maven", "Spring MVC", "Spring Security", "Spring JDBC", "MariaDB", "Nginx", "React", "MantineUI", "JS", "TS" ]}
       tags={[ "Front End", "Back End", "Security", "Stateful Applications", "Graph Problems", "Authentication", "Authorization" ]}
     />
@@ -89,12 +116,12 @@ export default function Projects() {
       githubLink="https://github.com/matthewKeville/proximity2" 
       body={
         <>
-          <Text c="white">
+          <BodyText>
             Proximity is a website that aggregates upcoming event data from various event providers and compiles into one place. For the outgoing
             tech nerd, you no longer need to scour multiple sites to find out the local happenings. Proximity allows users to define different geographical
             regions to scrape event data for and exports this information into different datasets depending on the users needs. Proximity supports
             the creation of export endpoints that can deliver 'icalenders', 'rss feeds', or 'json payloads'.
-          </Text>
+          </BodyText>
         </>}
       stack={[ "Java", "Maven",  "Spring MVC", "Spring Security", "Spring JDBC", "MariaDB", "React", "MantineUI", "JS"]}
       tags={[ "Front End", "Back End", "Security", "Web Scraping", "Automation" ]}
@@ -106,12 +133,13 @@ export default function Projects() {
       githubLink="https://github.com/matthewKeville/Sound-Drop-SD" 
       body={
         <>
-          <Text c="white">
+          <BodyText>
             Sound drop is an interactive audio-visual experience that lets the user create beats using dynamics of balls falling
             on lines. The length of line affects the pitch triggered by the collision and this pitch can be coerced into different scales such as
             Major, Minor, Pentatonic ... .
-          </Text>
+          </BodyText>
         </>}
+      imgUrls={["file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png","file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png","file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png"]}
       stack={[ "C++" , "SoLoud" , "OpenGL", "GLFW3", "ImGui" ]}
       tags={[ "Graphics Programming", "Audio Programming" ]}
     />
@@ -124,7 +152,7 @@ export default function Projects() {
       <Divider variant="solid" my="10px"/>
       {enigma}
       <Divider variant="dashed" my="40px"/>
-      {ReBoggled}
+      {flummox}
       <Divider variant="dashed" my="40px"/>
       {proximity}
       <Divider variant="dashed" my="40px"/>
