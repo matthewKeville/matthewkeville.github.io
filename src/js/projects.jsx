@@ -93,7 +93,7 @@ export default function Projects() {
           Likewise 'c,w' and 'c,i,w' delete the word (clue) but change your mode to insert mode, which is exited by 'escape'. 
         </BodyText>
         </>}
-      imgUrls={["file:///home/grifter/code/projects/website/static/enigma/enigma-cli.png","file:///home/grifter/code/projects/website/static/enigma/enigma-single.png","file:///home/grifter/code/projects/website/static/enigma/enigma-split.png","file:///home/grifter/code/projects/website/static/enigma/enigma-help.png"]}
+      imgUrls={["static/enigma/enigma-cli.png","static/enigma/enigma-single.png","static/enigma/enigma-split.png","static/enigma/enigma-help.png"]}
       stack={[ "C#", "NuGet", "Terminal.GUI", "SQLite" ]}
       tags={[ "CLI", "TUI", "Webscraper", "ORM" ]}
     />
@@ -111,11 +111,11 @@ export default function Projects() {
           </BodyText>
         </>}
       imgUrls={[
-        "file:///home/grifter/code/projects/website/static/flummox/lobby.png",
-        "file:///home/grifter/code/projects/website/static/flummox/in-game-1.png",
-        "file:///home/grifter/code/projects/website/static/flummox/in-game-2.png",
-        "file:///home/grifter/code/projects/website/static/flummox/post-game-1.png",
-        "file:///home/grifter/code/projects/website/static/flummox/post-game-2.png",
+        "static/flummox/lobby.png",
+        "static/flummox/in-game-1.png",
+        "static/flummox/in-game-2.png",
+        "static/flummox/post-game-1.png",
+        "static/flummox/post-game-2.png",
       ]}
       stack={[ "Java", "Maven", "Spring MVC", "Spring Security", "Spring JDBC", "MariaDB", "Nginx", "React", "MantineUI", "JS", "TS" ]}
       tags={[ "Front End", "Back End", "Security", "Stateful Applications", "Graph Problems", "Authentication", "Authorization" ]}
@@ -150,7 +150,7 @@ export default function Projects() {
             Major, Minor, Pentatonic ... .
           </BodyText>
         </>}
-      imgUrls={["file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png"]}
+      imgUrls={["static/SoundDropSD/picture1.png"]}
       stack={[ "C++" , "SoLoud" , "OpenGL", "GLFW3", "ImGui" ]}
       tags={[ "Graphics Programming", "Audio Programming" ]}
     />
