@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, Title, Box, Space, Divider, Center, Paper, Image, SimpleGrid } from '@mantine/core'
+import React, { useState } from 'react';
+import { Text, Title, Box, Space, Divider, Center, Paper, Image, SimpleGrid, Portal, Affix } from '@mantine/core'
 import { useFullscreen } from '@mantine/hooks';
 import { IconBrandGithub} from '@tabler/icons-react'
 
@@ -8,8 +8,21 @@ function BodyText(props) {
 }
 
 function ProjectImage(props) {
-  const { ref, toggle, fullscreen } = useFullscreen();
-  return <Image ref={ref} radius="md" src={props.src} onClick={toggle}/>
+
+  const [showModal, setShowModal] = useState(false)
+  let modal = 
+      <Portal>
+        <Affix position={{top: 0, left: 0}}>
+          {/* id like to center this Image but i'm throwing my hands up rn*/}
+          <Image style={{cursor: "pointer"}} h={window.innerHeight*.8} width="auto" fit="contain" radius="md" src={props.src} onClick={() => setShowModal(!showModal)}/>
+        </Affix>
+      </Portal>
+  return (
+    <>
+      {showModal && modal}
+      <Image style={{cursor: "pointer"}} m="5%" radius="md" src={props.src} onClick={() => { setShowModal(!showModal); console.log(props.src)}}/>
+    </>)
+
 }
 
 function Project({title ="default",githubLink="",body=<></>, imgUrls=[], stack=[], tags=[]}) {
@@ -35,10 +48,11 @@ function Project({title ="default",githubLink="",body=<></>, imgUrls=[], stack=[
       </Box>
       <Space h="md"/>
       <Box mx="3%">
-        <SimpleGrid cols={Math.min(imgUrls.length,3)}>
+        <SimpleGrid cols={3}>
           {imgUrls.map( url => (
             <ProjectImage 
               src={url}
+              key={url}
             />
           ))}
         </SimpleGrid>
@@ -76,13 +90,10 @@ export default function Projects() {
           Inside the captive interface of the program the "grid", you manipulate your crossword with keystrokes scoped into different modes.
           In normal mode, you are navigating the board across grid squares or along clue axes. Here you can perform actions that
           would be intuitive to a seasoned vimmer, such 'd,w' to delete a word (clue) or it's variant 'd,i,w' to delete the entire word (clue).
-          Likewise 'c,w' and 'c,i,w' delete the word (clue) but change your mode to insert mode, which is exited by 'escape'. While jumping clues
-          with the motions 'w' and 'b' are a much welcomed feature, the implementation of gg(digit)(digit) is an example where this philosphy really shines.
-          The grid is juxtaposed to a dynamic clues views, displaying each clue and it's ordinal. So if something catches your eye, you don't need to play
-          I spy and locate where the clue resides, you can use the sequence gg12, to jump to the 12th ordinal directly.  
+          Likewise 'c,w' and 'c,i,w' delete the word (clue) but change your mode to insert mode, which is exited by 'escape'. 
         </BodyText>
         </>}
-      imgUrls={["file:///home/grifter/code/projects/website/static/enigma/enigma-single-clues.png","file:///home/grifter/code/projects/website/static/enigma/enigma-split-clues.png"]}
+      imgUrls={["file:///home/grifter/code/projects/website/static/enigma/enigma-cli.png","file:///home/grifter/code/projects/website/static/enigma/enigma-single.png","file:///home/grifter/code/projects/website/static/enigma/enigma-split.png","file:///home/grifter/code/projects/website/static/enigma/enigma-help.png"]}
       stack={[ "C#", "NuGet", "Terminal.GUI", "SQLite" ]}
       tags={[ "CLI", "TUI", "Webscraper", "ORM" ]}
     />
@@ -96,7 +107,7 @@ export default function Projects() {
           <BodyText>
             Flummox is a online platform to play Boggle™ with various customizations to the board and ruleset. While the obvious modifications of the game
             are present such as time limit changes, scoring changes (first finder, any, unique), and board size. The most unqiue feature is the ability to play
-            the game in new topologies. For the word and math inclined, it is a dream to flex your lexicon on the surface of a torus or a klien bottle.
+            the game in new topologies. For the word and math nerd, it is a pleasure to flex your lexicon on the surface of a torus or a klien bottle.
           </BodyText>
         </>}
       imgUrls={[
@@ -139,14 +150,14 @@ export default function Projects() {
             Major, Minor, Pentatonic ... .
           </BodyText>
         </>}
-      imgUrls={["file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png","file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png","file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png"]}
+      imgUrls={["file:///home/grifter/code/projects/website/static/SoundDropSD/picture1.png"]}
       stack={[ "C++" , "SoLoud" , "OpenGL", "GLFW3", "ImGui" ]}
       tags={[ "Graphics Programming", "Audio Programming" ]}
     />
 
   return (
 
-    <Box bg="cyber-dark-grey">
+    <Box id="projects-root" bg="cyber-dark-grey">
 
       <Title order={2} c="cyber-orange"> Projects </Title>
       <Divider variant="solid" my="10px"/>

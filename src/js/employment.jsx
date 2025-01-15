@@ -23,15 +23,15 @@ export default function Employments() {
     body =
       <Text c="white">
         At RoosterOil Software I worked as a fullstack web developer building
-        application features within the ASP.NET ecosystem. I used Entity Framework,
-        Blazor, Tailwind CSS to create new functionality and expand existing processess
+        application features within the .NET ecosystem. I used ASP.NET, Entity Framework,
+        and Blazor, to create new functionality and expand existing processess
         in direct response to our client's most exigent needs. RoosterOil is a small
         privately funded startup, as such my time there was spent fulfilling a wide array
         of non software duties aswell. I would travel across NJ to perform installations of
         our hardware at client venues. Connect with customers, to put a face on the virtual
-        entity they communicated with in Boston. I would create a expirements and perform experiments
-        with our hardware at venues to discover issues mired in the gulf between headquarters and 
-        our clients.
+        entity they communicated with in Boston. I would create field tests and perform experiments
+        with our hardware to discover issues mired in the gulf between headquarters and 
+        client venues.
       </Text>
   />
 
@@ -43,8 +43,8 @@ export default function Employments() {
       <Text c="white">
         At the EPS corporation I played the role of a Testing Engineer. I migrated 
         hundreds of Junit and Selenium tests to support the transition of a product to
-        a new target platform : Microsoft Edge. My other primary duty was the management
-        of our Jenkins Automation server.
+        a new target platform : Microsoft Edge and managed a Jenkins server for the automation
+        of our testing and release procedures. 
       </Text>
   />
 
@@ -67,7 +67,7 @@ export default function Employments() {
     body =
       <Text c="white">
         Dominoes my beloved, a canon event in the life of early college student. I
-        dilligently slung 'za from car to those with empty stomaches.
+        dilligently slung 'za from my car to those with empty stomaches.
       </Text>
   />
 
