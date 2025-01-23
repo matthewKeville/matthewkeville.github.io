@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AppShell, Box, Title, Divider, Flex, Text } from "@mantine/core";
 import Marquee from "react-fast-marquee";
 
-import Bio from "./bio.jsx"
 import Projects from "./projects.jsx"
 import Employments from "./employment.jsx"
 
@@ -18,6 +17,7 @@ export default function Root() {
         collapsed: { mobile: true, desktop: true },
         padding: "md"
       }}
+      bg="cyber-dark-grey"
     >
 
       <AppShell.Header bg="black" align="center">
@@ -60,7 +60,7 @@ export default function Root() {
 
       <AppShell.Main bg="cyber-dark-grey">
 
-         <Box mx="5%">
+         <Box mx="5%" pb="5%">
 
           <Box mx="5%" pt="2%">
           {/*<Bio/>*/}

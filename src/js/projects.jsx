@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Title, Box, Space, Divider, Center, Paper, Image, SimpleGrid, Portal, Affix } from '@mantine/core'
-import { useFullscreen } from '@mantine/hooks';
+import { Text, Title, Box, Space, Divider, Center, Group, Image, SimpleGrid, Portal, Affix } from '@mantine/core'
 import { IconBrandGithub} from '@tabler/icons-react'
 
 function BodyText(props) {
@@ -25,7 +24,7 @@ function ProjectImage(props) {
 
 }
 
-function Project({title ="default",githubLink="",body=<></>, imgUrls=[], stack=[], tags=[]}) {
+function Project({title ="default",githubLink="",webLink="", body=<></>, imgUrls=[], stack=[], tags=[]}) {
 
   let stackString = ""
   stack.forEach( stack => (
@@ -39,8 +38,22 @@ function Project({title ="default",githubLink="",body=<></>, imgUrls=[], stack=[
 
   return (
     <Box> 
-      <Text fw={700} span mr="4px" size="xl" c="cyber-green">{title}</Text>
-      <a href={githubLink}><IconBrandGithub style={{verticalAlign:"-10px"}} size={32} color="purple"/></a>
+      <Group justify="space-between">
+        <Text fw={700} span mr="4px" size="xl" c="cyber-green">{title}</Text>
+        <Box>
+          <a href={githubLink}>
+            <Text mr="8px" fw={700} span size="sm" c="cyber-green">{githubLink.substring(8)}</Text>
+          </a>
+          <IconBrandGithub style={{verticalAlign:"-5px"}} size={20} color="purple"/>
+        </Box>
+      </Group>
+      { webLink != "" &&
+      <Group>
+        <a href={webLink}>
+          <Text mr="8px" fw={700} span size="sm" c="cyber-orange">{webLink.substring(8)}</Text>
+        </a>
+      </Group>
+      }
       <Box mx="3%">
         <Space h="md"/>
         {body}
@@ -102,6 +115,7 @@ export default function Projects() {
     <Project 
       title="flummox" 
       githubLink="https://github.com/matthewKeville/ReBoggled" 
+      webLink="https://flummox-app.duckdns.org"
       body={
         <>
           <BodyText>
@@ -155,6 +169,21 @@ export default function Projects() {
       tags={[ "Graphics Programming", "Audio Programming" ]}
     />
 
+  let website = 
+    <Project 
+      title="portfolio" 
+      githubLink="https://github.com/matthewKeville/website" 
+      body={
+        <>
+          <BodyText>
+            The source code for this website.
+          </BodyText>
+        </>}
+      imgUrls={[]}
+      stack={[ "JavaScript", "React", "MantineUI", "Webpack", "CSS" ]}
+      tags={[ "Web Programming", "Front-End Development" ]}
+    />
+
   return (
 
     <Box id="projects-root" bg="cyber-dark-grey">
@@ -168,6 +197,8 @@ export default function Projects() {
       {proximity}
       <Divider variant="dashed" my="40px"/>
       {SoundDropSD}
+      <Divider variant="dashed" my="40px"/>
+      {website}
 
     </Box>
   )
